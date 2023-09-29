@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import CustomForm from "./components/CustomForm";
+import ResumeRender from "./components/ResumeRender";
 
 function App() {
   const [formData, setFormData] = useState();
@@ -15,8 +16,10 @@ function App() {
       <br />
 
       <div className="flex flex-row">
-      <CustomForm onSubmit={handleFormSubmit} />
-      <div className="border-l border-gray-300 h-50 mx-4"></div>
+        <CustomForm onSubmit={handleFormSubmit} />
+        <div className="border-l border-gray-300 h-50 mx-4"></div>
+
+        <ResumeRender formData={formData} />
       </div>
     </>
   );

@@ -60,6 +60,7 @@ export default function CustomForm({ onSubmit }) {
           <option value="phd">PHD</option>
         </select>
       </label>
+      <hr />
       <label>
         Area of Study:{" "}
         <select name="degrees" id="degrees">
@@ -109,7 +110,7 @@ export default function CustomForm({ onSubmit }) {
           type="submit"
           className="bg-gray-800 text-white rounded-lg px-4 py-2 hover:bg-gray-600"
         >
-          Submit form
+          Save
         </button>
       </div>
     </form>
