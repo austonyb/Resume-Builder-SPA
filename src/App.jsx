@@ -11,9 +11,13 @@ function App() {
   };
   return (
     <>
-      <h1>Resume</h1>
+      <h1 className="text-3xl">Resume</h1>
       <br />
+
+      <div className="flex flex-row">
       <CustomForm onSubmit={handleFormSubmit} />
+      <div className="border-l border-gray-300 h-50 mx-4"></div>
+      </div>
 
       {formData && (
         <div>

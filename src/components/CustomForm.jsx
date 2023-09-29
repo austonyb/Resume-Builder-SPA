@@ -1,4 +1,15 @@
+import { useState } from "react";
+import ExperienceForm from "./ExperienceForm";
+
 export default function CustomForm({ onSubmit }) {
+  const [experienceForms, setExperienceForms] = useState([
+    <ExperienceForm key={0} />,
+  ]);
+
+  const reset = () => {
+    setExperienceForms([<ExperienceForm key={0} />]);
+  };
+
   function handleSubmit(e) {
     // Prevent the browser from reloading the page
     e.preventDefault();
@@ -13,6 +24,12 @@ export default function CustomForm({ onSubmit }) {
 
     onSubmit(formJson);
   }
+
+  const addAnother = (e) => {
+    e.preventDefault();
+    const newIndex = experienceForms.length;
+    setExperienceForms([...experienceForms, <ExperienceForm key={newIndex} jobKey={newIndex}/>]);
+  };
 
   return (
     <form method="post" onSubmit={handleSubmit}>
@@ -56,9 +73,30 @@ export default function CustomForm({ onSubmit }) {
         </select>
       </label>
       <hr />
+      <label>
+        Graduation Date: <input name="graduationDate" type="date" />
+      </label>
+      <hr />
+
+      {experienceForms.map((experienceForm, index) => (
+        <div key={index}>
+          {experienceForm}
+          <hr />
+        </div>
+      ))}
+
+      <br />
+      <button
+        onClick={addAnother}
+        className="border-2 border-gray-400 rounded-lg p-1"
+      >
+        Add Another!
+      </button>
+      <br />
       <div className="p-2">
         <button
           type="reset"
+          onClick={reset}
           className="bg-gray-800 text-white rounded-lg px-4 py-2 hover:bg-gray-600"
         >
           Reset form
