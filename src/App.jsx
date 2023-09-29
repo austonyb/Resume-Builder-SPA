@@ -12,7 +12,7 @@ function App() {
   };
   return (
     <>
-      <h1 className="text-3xl">Resume</h1>
+      <h1 className="text-3xl text-left">Resume Builder 1.0</h1>
       <br />
 
       <div className="flex flex-row">
