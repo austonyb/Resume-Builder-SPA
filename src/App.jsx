@@ -18,13 +18,6 @@ function App() {
       <CustomForm onSubmit={handleFormSubmit} />
       <div className="border-l border-gray-300 h-50 mx-4"></div>
       </div>
-
-      {formData && (
-        <div>
-          <h2>Submitted Data</h2>
-          <pre>{JSON.stringify(formData, null, 2)}</pre>
-        </div>
-      )}
     </>
   );
 }

@@ -2,33 +2,30 @@ import { useState } from "react";
 import ExperienceForm from "./ExperienceForm";
 
 export default function CustomForm({ onSubmit }) {
-  const [experienceForms, setExperienceForms] = useState([
-    <ExperienceForm key={0} />,
-  ]);
+  const [experienceForms, setExperienceForms] = useState([]);
 
   const reset = () => {
-    setExperienceForms([<ExperienceForm key={0} />]);
+    setExperienceForms([]);
   };
 
   function handleSubmit(e) {
-    // Prevent the browser from reloading the page
     e.preventDefault();
-
-    // Read the form data
     const form = e.target;
     const formData = new FormData(form);
 
-    // Or you can work with it as a plain object:
+    // Convert form data to JSON
     const formJson = Object.fromEntries(formData.entries());
+
+    // Add experiences to the formJson object
+    formJson.experiences = experienceForms;
+
     console.log(formJson);
 
     onSubmit(formJson);
   }
 
-  const addAnother = (e) => {
-    e.preventDefault();
-    const newIndex = experienceForms.length;
-    setExperienceForms([...experienceForms, <ExperienceForm key={newIndex} jobKey={newIndex}/>]);
+  const addExperience = (experience) => {
+    setExperienceForms([...experienceForms, experience]);
   };
 
   return (
@@ -78,19 +75,26 @@ export default function CustomForm({ onSubmit }) {
       </label>
       <hr />
 
-      {experienceForms.map((experienceForm, index) => (
+      {experienceForms.map((experience, index) => (
         <div key={index}>
-          {experienceForm}
+          <ExperienceForm
+            experience={experience}
+            onChange={(updatedExperience) => {
+              const updatedExperiences = [...experienceForms];
+              updatedExperiences[index] = updatedExperience;
+              setExperienceForms(updatedExperiences);
+            }}
+          />
           <hr />
         </div>
       ))}
 
       <br />
       <button
-        onClick={addAnother}
+        onClick={() => addExperience({ company: '', position: '', experience: '' })}
         className="border-2 border-gray-400 rounded-lg p-1"
       >
-        Add Another!
+        Add Experience
       </button>
       <br />
       <div className="p-2">
